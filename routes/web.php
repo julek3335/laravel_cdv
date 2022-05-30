@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
-// use App\Http\Controllers\CdvSite;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController2;
+use App\Http\Controllers\AdminController2;
+// use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,31 +52,31 @@ Route::redirect('/adress/{city}/{street?}/{zipCode?}','/adres/{city}/{street?}/{
 // });
 
 
-Route::prefix('admin')->group(function(){
+// Route::prefix('admin')->group(function(){
 
-    Route::get('/home/{name}', function ($name) {
-        echo "witaj na strinie $name";
-    });
+//     Route::get('/home/{name}', function ($name) {
+//         echo "witaj na strinie $name";
+//     });
 
-    Route::get('/users', function () {
-        echo "users<br>";
-    });
+//     Route::get('/users', function () {
+//         echo "users<br>";
+//     });
 
-    Route::redirect('/{name}', '/admin/home/{name}');
+//     Route::redirect('/{name}', '/admin/home/{name}');
 
-    Route::get('/user/{name}/{age?}', function(string $name, int $age = null){
-        echo "Imie $name";
+//     Route::get('/user/{name}/{age?}', function(string $name, int $age = null){
+//         echo "Imie $name";
 
-        if($age != null){
-            echo $age;
-        }
+//         if($age != null){
+//             echo $age;
+//         }
 
-    })->where([
-        "name" => '[\w]+',
-        "age" => "[0-9]+"
-    ]);
+//     })->where([
+//         "name" => '[\w]+',
+//         "age" => "[0-9]+"
+//     ]);
 
-});
+// });
 
 Route::get('/car/{brand?}/{model?}/{color?}/{price?}',function(string $brand = "bd", string $model = "bd", string $color = "bd", int $price = null){
     echo "Marka: $brand, Model $model <br> Kolor: $color <br> Cena: $price";
@@ -101,27 +104,15 @@ return view('userform');
 
 Route::post('UserController',[App\Http\Controllers\UserController::class, "account"]);
 
-Route::view('user','user');
+// Route::view('user','user');
 Route::post('UserController1',[App\Http\Controllers\UserController1::class, "account"]);
 Route::post('Form',[App\Http\Controllers\Form::class, "account"]);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout']);
+Route::get('/logout', [HomeController::class, 'logout']);
 
 Route::get('db',[App\Http\Controllers\DbColtroller::class,'show']);
 
@@ -142,3 +133,16 @@ Route::get('prophile',function(){
             env('locale', 'en');
             return view('prophile');
             });
+
+// Route::get('user',[App\Http\Controllers\UserController2::class, 'index']);
+
+// Route::get('admin',function(){
+//     return 'Admin';
+// });
+
+// Route::get('user', function(){
+//     return 'User';
+// });
+
+Route::get('user', [UserController2::class, "index"])->name('user');
+Route::get('admin', [AdminController2::class, "index"])->name('admin');

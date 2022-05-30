@@ -25,10 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Test::select(['*'])
-        // ->where('surname', 'Anna')
-        ->get();
-        return view('test1',['data'=>$data]);
+        // $data = Test::select(['*'])
+        // // ->where('surname', 'Anna')
+        // ->get();
+        // return view('test1',['data'=>$data]);
 
 
         // $name = Auth::user()->name;
@@ -41,7 +41,7 @@ class HomeController extends Controller
         // $test->surname = 'Nowak';
         // $test->save();
 
-        // return view('adminLte.dashBoadr');
+        return view('adminLte.dashBoadr');
     }
 
     public function logout()
